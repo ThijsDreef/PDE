@@ -21,6 +21,11 @@ FileTime inline getFileTime(const char* fileName) {
 
     if (GetFileAttributesExA(fileName, GetFileExInfoStandard, &Data))
         Result = Data.ftLastWriteTime;
-
     return Result;
+}
+
+bool inline fileExists(const char* name) {
+    WIN32_FILE_ATTRIBUTE_DATA Ignored;
+    return !GetFileAttributesExA(name, GetFileExInfoStandard, &Ignored);
+
 }

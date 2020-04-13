@@ -1,6 +1,7 @@
 #pragma once
 #include "pde/Modules/ModuleLoader.h"
 #include "pde/Window.h"
+#include "pde/Util/hash.h"
 #include <vector>
 
 #define SYSTEMS_DLL "pde-systems.dll"
@@ -12,6 +13,7 @@ private:
     ModuleLoader moduleLoader;
     Window w;
     bool running;
+    void checkHotReload();
 public:
     void start();
     void run();
