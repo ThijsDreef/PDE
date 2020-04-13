@@ -1,0 +1,10 @@
+ add_library(pde-systems SHARED 
+    Source/PrintModule.cpp)
+
+
+add_custom_command(TARGET pde-systems 
+PRE_BUILD
+COMMAND powershell ""touch ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/lock.txt"")
+add_custom_command(TARGET pde-systems 
+POST_BUILD
+COMMAND powershell ""rm ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/lock.txt"")

@@ -1,0 +1,13 @@
+add_library(pde-engine SHARED 
+    Source/Modules/ModuleLoader.cpp 
+    Source/Engine.cpp)
+
+if (WIN32)
+    target_sources(pde-engine PUBLIC Source/Win32Window.cpp)
+endif(WIN32)
+
+find_package(OpenGL REQUIRED)
+
+target_link_libraries(pde-engine libglew_shared)
+
+target_include_directories(pde-engine PUBLIC Headers/)
