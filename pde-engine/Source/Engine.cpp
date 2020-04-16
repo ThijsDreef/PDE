@@ -2,7 +2,7 @@
 #include <iostream> 
 
 
-Engine::Engine() : w("hello world", 520, 380, false) {
+Engine::Engine() : w("hello world", 520, 380, false), g(w.getParameters()) {
     running = false;
     copyFile((char*)SYSTEMS_DLL, (char*)COPY_SYSTEMS_DLL_NAME);
     moduleLoader.load(COPY_SYSTEMS_DLL_NAME, MANIFEST_FILE);
@@ -30,7 +30,9 @@ void Engine::run() {
     while (running) {
         checkHotReload();
         w.update();
-        moduleLoader.getModule(hash("print"))->update();
+        Module* t = moduleLoader.getModule(hash("print"));
+        if (t->update) t->update();
+        g.update();
     }
 }
 

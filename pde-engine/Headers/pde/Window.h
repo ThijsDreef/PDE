@@ -18,4 +18,5 @@ public:
     void update() { updateWindow(); };
     Window(char* title, unsigned int w, unsigned int h, bool fullscreen) { createWindow(title, w, h, fullscreen); }
     ~Window() { deleteWindow(); };
+    WindowParameters& getParameters() { return parameters; }
 };

@@ -1,4 +1,6 @@
 #include <iostream>
+#include "Windows.h"
+#include "glad/glad.h"
 
 extern "C" {
 
@@ -7,8 +9,10 @@ extern "C" {
     }
 
     void print_update() {
-        // std::cout << "hoi Niels\n";
-        // std::cout << "and boop\n";
+        glClearColor(0.0, 0.0, 0.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        Sleep(60);
+        // std::cout << "deeedee\n";
     }
 
     void print_close() {

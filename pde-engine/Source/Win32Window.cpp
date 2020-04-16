@@ -58,6 +58,7 @@ void Window::createWindow(char* title, unsigned int width, unsigned int height, 
     if (!(parameters.hWnd = CreateWindowExA(dwExStyle, title, title, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | dwStyle, 0, 0, windowRect.right - windowRect.left, windowRect.bottom - windowRect.top, NULL, NULL, parameters.hInstance, NULL))) {
       
     }
+    SetWindowPos(parameters.hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
     SetPropA(parameters.hWnd, "PDEWindow", this);
     ShowWindow(parameters.hWnd, SW_SHOW);
     SetForegroundWindow(parameters.hWnd);

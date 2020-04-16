@@ -1,6 +1,8 @@
 #pragma once
 #include "pde/Modules/ModuleLoader.h"
 #include "pde/Window.h"
+#include "pde/Graphics/Graphics.h"
+
 #include "pde/Util/hash.h"
 #include <vector>
 
@@ -12,6 +14,7 @@ class Engine {
 private:
     ModuleLoader moduleLoader;
     Window w;
+    Graphics g;
     bool running;
     void checkHotReload();
 public:
