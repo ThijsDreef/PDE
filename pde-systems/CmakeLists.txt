@@ -1,5 +1,8 @@
+
+
 add_library(pde-systems SHARED Source/PrintModule.cpp)
-target_link_libraries(pde-systems PRIVATE glad)
+target_include_directories(pde-systems PUBLIC Headers/)
+target_link_libraries(pde-systems PRIVATE glad pde-engine)
 
 
 

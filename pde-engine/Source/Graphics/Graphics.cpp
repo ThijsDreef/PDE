@@ -54,21 +54,21 @@ void Graphics::initContext(WindowParameters parameters) {
         return;
     }
     
-
-//     if (GLAD_ARB && WGLEW_ARB_pixel_format)
-//   {
-//     int iContextAttribs[] =
-//     {
-//        WGL_CONTEXT_MAJOR_VERSION_ARB, 4,
-//        WGL_CONTEXT_MINOR_VERSION_ARB, 3,
-//        WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
-//        0 // End of attributes list
-//     };
-//     wglMakeCurrent(NULL, NULL);
-//     wglDeleteContext(context);
-//     hRC = wglCreateContextAttribsARB(hDC, 0, iContextAttribs);
-//     wglMakeCurrent(hDC, hRC);
-//   }
+    // TODO update glad to support forcing higher context to make renderdoc work
+    // if (GLAD_ARB && WGLEW_ARB_pixel_format)
+    // {
+    //     int iContextAttribs[] =
+    //     {
+    //     WGL_CONTEXT_MAJOR_VERSION_ARB, 4,
+    //     WGL_CONTEXT_MINOR_VERSION_ARB, 3,
+    //     WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
+    //     0 // End of attributes list
+    //     };
+    //     wglMakeCurrent(NULL, NULL);
+    //     wglDeleteContext(context);
+    //     hRC = wglCreateContextAttribsARB(hDC, 0, iContextAttribs);
+    //     wglMakeCurrent(hDC, hRC);
+    // }
     gladLoadGL();
 }
 

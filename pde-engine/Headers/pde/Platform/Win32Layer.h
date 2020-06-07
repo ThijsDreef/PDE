@@ -8,7 +8,7 @@
 #define getLibraryFunction(lib, fn) GetProcAddress(lib, fn)
 #define freeLibrary(lib) FreeLibrary(lib)
 #define copyFile(name, dest) CopyFileA(name, dest, FALSE)
-#define compareFileTime(fileTime, other) CompareFileTime(fileTime, other);
+#define compareFileTime(fileTime, other) CompareFileTime(fileTime, other)
 
 struct WindowParameters {
     HINSTANCE hInstance;
@@ -26,6 +26,6 @@ FileTime inline getFileTime(const char* fileName) {
 
 bool inline fileExists(const char* name) {
     WIN32_FILE_ATTRIBUTE_DATA Ignored;
-    return !GetFileAttributesExA(name, GetFileExInfoStandard, &Ignored);
+    return GetFileAttributesExA(name, GetFileExInfoStandard, &Ignored);
 
 }

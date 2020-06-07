@@ -27,17 +27,20 @@ bool ModuleLoader::load(const char* dllName, const char* manifest) {
     std::string line;
     while (std::getline(manifestFile, line)) {
         unsigned long moduleHash = hash(line.c_str());
-        Module*m = &modules[moduleHash];
-        if (m->exit) m->exit();
-        m->init = (void(*)())(getLibraryFunction(library, (line + "_init").c_str()));
-        m->update = (void(*)())(getLibraryFunction(library, (line + "_update").c_str()));
-        m->exit = (void(*)())(getLibraryFunction(library, (line + "_exit").c_str()));
-        if (m->init) m->init();
+        if (modules[moduleHash]) delete modules[moduleHash];
+        Module*(*getModule)() = (Module*(*)())(getLibraryFunction(library, ("pde_make_" + line).c_str()));
+        if (getModule) {
+            modules[moduleHash] = getModule();
+            std::cout << "made module\n";
+        } else  {
+            std::cout << "failed module\n";
+            modules[moduleHash] = nullptr;
+        }
     }
 
     return true;
 }
 
 Module* ModuleLoader::getModule(unsigned long module) {
-    return &modules[module];
+    return modules[module];
 }

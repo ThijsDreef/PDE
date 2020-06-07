@@ -5,7 +5,7 @@
 class ModuleLoader {
 private:
     LibraryType library;
-    std::map<unsigned long, Module> modules;
+    std::map<unsigned long, Module*> modules;
 public:
     ~ModuleLoader();
     ModuleLoader();

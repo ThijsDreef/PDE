@@ -1,5 +1,4 @@
 #pragma once
+#define MAX_ENTITIES 1024
 
-struct Entity {
-    unsigned int id;
-};
+typedef unsigned int Entity;

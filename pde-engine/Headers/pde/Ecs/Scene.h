@@ -5,9 +5,11 @@
 
 class Scene {
 private:
-    std::map<unsigned long, unsigned int> currentModules;
-    std::vector<Module> modules;
+    std::vector<Module*> m_modules;
 public:
+    ~Scene();
+    Scene();
+    void addModule(Module* module);
     void exit();
     void init();
     void update();

@@ -1,0 +1,35 @@
+{
+    "tasks": [
+        {
+            "label": "Run",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "start run.bat"
+            }
+        },
+        {
+            "label": "Rebuild-Systems",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "./build-systems.bat"
+            }
+        },
+        {
+            "label": "Build-all",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "./build.bat"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

@@ -1,21 +1,20 @@
 #include <iostream>
+#include "PrintModule.h"
 #include "Windows.h"
 #include "glad/glad.h"
 
-extern "C" {
+MAKE_MODULE(PrintModule)
 
-    void print_init() {
+void PrintModule::init() {
 
-    }
+}
 
-    void print_update() {
-        glClearColor(0.0, 0.0, 0.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT);
-        Sleep(60);
-        // std::cout << "deeedee\n";
-    }
+void PrintModule::update() {
+    glClearColor(r, g, b, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    Sleep(60);
+}
 
-    void print_close() {
+void PrintModule::exit() {
 
-    }
 }

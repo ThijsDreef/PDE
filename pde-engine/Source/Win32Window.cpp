@@ -1,4 +1,5 @@
 #include "pde/Window.h"
+#include <iostream>
 
 void Window::createWindow(char* title, unsigned int width, unsigned int height, bool fullscreen) {
     this->title = title;
@@ -86,8 +87,25 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
     Window* pThis = static_cast<Window*>(GetPropA(hWnd, "PDEWindow"));
     if (pThis) return pThis->realWndProc(hWnd, uMsg, wParam, lParam);
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
-  }
+}
 
-  LRESULT CALLBACK Window::realWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-      return DefWindowProc(hWnd,  uMsg, wParam, lParam);
-  }
+LRESULT CALLBACK Window::realWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    switch (uMsg) {
+        case WM_CLOSE:
+            // TODO: call exit 
+            return 0;
+        case WM_SIZING:
+        case WM_SIZE:
+            // TODO: allow for resizing
+            return 0;
+        case WM_MBUTTONDOWN:
+        case WM_MBUTTONUP:
+        case WM_MOUSEWHEEL:
+        case WM_KEYDOWN:
+        case WM_KEYUP:
+            // TODO: post input messages
+        default:
+            return DefWindowProc(hWnd,  uMsg, wParam, lParam);
+    }
+
+}

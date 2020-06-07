@@ -18,7 +18,7 @@ void Engine::start() {
 }
 
 void Engine::checkHotReload() {
-    if (CompareFileTime(&getFileTime(SYSTEMS_DLL), &getFileTime(COPY_SYSTEMS_DLL_NAME)) != 0 && fileExists("lock.txt")) {
+    if (compareFileTime(&getFileTime(SYSTEMS_DLL), &getFileTime(COPY_SYSTEMS_DLL_NAME)) != 0 && !fileExists("lock.txt")) {
         std::cout << "start reload\n";
         moduleLoader.freeModule();
         if (!copyFile((char*)SYSTEMS_DLL, (char*)COPY_SYSTEMS_DLL_NAME)) return;
@@ -30,8 +30,11 @@ void Engine::run() {
     while (running) {
         checkHotReload();
         w.update();
-        Module* t = moduleLoader.getModule(hash("print"));
-        if (t->update) t->update();
+        Module* t = moduleLoader.getModule(hash("PrintModule"));
+        if (t) t->update();
+        else {
+            std::cout << "no t\n";
+        }
         g.update();
     }
 }
