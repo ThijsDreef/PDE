@@ -1,10 +1,12 @@
 #include "pde/Modules/Module.h"
+#include "pde/Math/Vector3F.h"
 
 class PrintModule : public Module {
 private:
-    double r = 0;
-    double g = 0;
-    double b = 0;
+    Vector3F color;
+    Vector3F targetColor;
+    float lerp;
+    Vector3F randColor();
 public:
     void init();
     void update();

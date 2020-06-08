@@ -10,10 +10,18 @@ ModuleLoader::ModuleLoader() {
 }
 
 ModuleLoader::~ModuleLoader() {
+    freeModules();
+}
 
+void ModuleLoader::freeModules() {
+    for (const auto module : modules) {
+        module.second->exit();
+        delete module.second;
+    }
 }
 
 void ModuleLoader::freeModule() {
+    freeModules();
     if (!freeLibrary(library)) return;
     library = 0;
 }
@@ -27,20 +35,18 @@ bool ModuleLoader::load(const char* dllName, const char* manifest) {
     std::string line;
     while (std::getline(manifestFile, line)) {
         unsigned long moduleHash = hash(line.c_str());
-        if (modules[moduleHash]) delete modules[moduleHash];
         Module*(*getModule)() = (Module*(*)())(getLibraryFunction(library, ("pde_make_" + line).c_str()));
+        
         if (getModule) {
             modules[moduleHash] = getModule();
-            std::cout << "made module\n";
-        } else  {
-            std::cout << "failed module\n";
-            modules[moduleHash] = nullptr;
+            modules[moduleHash]->init();
         }
+        else modules[moduleHash] = nullptr;
     }
 
     return true;
 }
 
-Module* ModuleLoader::getModule(unsigned long module) {
-    return modules[module];
+Module** ModuleLoader::getModule(unsigned long module) {
+    return &modules[module];
 }

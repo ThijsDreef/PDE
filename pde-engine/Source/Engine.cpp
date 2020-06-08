@@ -29,12 +29,9 @@ void Engine::checkHotReload() {
 void Engine::run() {
     while (running) {
         checkHotReload();
-        w.update();
-        Module* t = moduleLoader.getModule(hash("PrintModule"));
+        Module* t = *moduleLoader.getModule(hash("PrintModule"));
         if (t) t->update();
-        else {
-            std::cout << "no t\n";
-        }
+        w.update();
         g.update();
     }
 }

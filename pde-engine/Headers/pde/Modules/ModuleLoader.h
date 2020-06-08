@@ -1,15 +1,17 @@
 #pragma once
 #include "pde/Modules/Module.h"
 #include "pde/PlatformLayer.h"
-#include <map>
+#include <unordered_map>
+
 class ModuleLoader {
 private:
     LibraryType library;
-    std::map<unsigned long, Module*> modules;
+    std::unordered_map<unsigned long, Module*> modules;
+    void freeModules();
 public:
     ~ModuleLoader();
     ModuleLoader();
     void freeModule();
     bool load(const char* dllName, const char* manifest);
-    Module* getModule(unsigned long module);
+    Module** getModule(unsigned long module);
 };

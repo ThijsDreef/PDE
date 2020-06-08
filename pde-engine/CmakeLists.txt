@@ -1,7 +1,8 @@
 add_library(pde-engine SHARED 
     Source/Modules/ModuleLoader.cpp 
     Source/Engine.cpp
-    Source/Graphics/Graphics.cpp)
+    Source/Graphics/Graphics.cpp
+    Source/Math/Vector3F.cpp)
 
 if (WIN32)
     target_sources(pde-engine PUBLIC Source/Win32Window.cpp)
