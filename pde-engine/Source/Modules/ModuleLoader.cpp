@@ -5,8 +5,7 @@
 #include <string>
 
 ModuleLoader::ModuleLoader() {
-    library = 0;
-
+    library = nullptr;
 }
 
 ModuleLoader::~ModuleLoader() {
@@ -36,7 +35,7 @@ bool ModuleLoader::load(const char* dllName, const char* manifest) {
     while (std::getline(manifestFile, line)) {
         unsigned long moduleHash = hash(line.c_str());
         Module*(*getModule)() = (Module*(*)())(getLibraryFunction(library, ("pde_make_" + line).c_str()));
-        
+
         if (getModule) {
             modules[moduleHash] = getModule();
             modules[moduleHash]->init();

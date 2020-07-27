@@ -21,7 +21,7 @@ Vector3F PrintModule::randColor() {
 }
 
 void PrintModule::update() {
-    lerp += 1/60.0f;
+    lerp += 1/75.0f;
     if (lerp > 1.0f) {
         lerp = 0;
         color = targetColor;

@@ -12,10 +12,10 @@
 
 class Engine {
 private:
-    ModuleLoader moduleLoader;
-    Window w;
-    Graphics g;
-    bool running;
+    ModuleLoader m_moduleLoader;
+    Window m_window;
+    Graphics m_graphics;
+    bool m_running;
     void checkHotReload();
 public:
     void start();

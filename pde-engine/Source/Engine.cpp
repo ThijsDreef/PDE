@@ -2,10 +2,10 @@
 #include <iostream> 
 
 
-Engine::Engine() : w("hello world", 520, 380, false), g(w.getParameters()) {
-    running = false;
+Engine::Engine() : m_window("hello world", 520, 380, false), m_graphics(m_window.getParameters()) {
+    m_running = false;
     copyFile((char*)SYSTEMS_DLL, (char*)COPY_SYSTEMS_DLL_NAME);
-    moduleLoader.load(COPY_SYSTEMS_DLL_NAME, MANIFEST_FILE);
+    m_moduleLoader.load(COPY_SYSTEMS_DLL_NAME, MANIFEST_FILE);
 }
 
 Engine::~Engine() {
@@ -13,29 +13,29 @@ Engine::~Engine() {
 }
 
 void Engine::start() {
-    running = true;
+    m_running = true;
     run();
 }
 
 void Engine::checkHotReload() {
-    if (compareFileTime(&getFileTime(SYSTEMS_DLL), &getFileTime(COPY_SYSTEMS_DLL_NAME)) != 0 && !fileExists("lock.txt")) {
+    if (!fileExists("lock.txt") && compareFileTime(&getFileTime(SYSTEMS_DLL), &getFileTime(COPY_SYSTEMS_DLL_NAME)) != 0) {
         std::cout << "start reload\n";
-        moduleLoader.freeModule();
+        m_moduleLoader.freeModule();
         if (!copyFile((char*)SYSTEMS_DLL, (char*)COPY_SYSTEMS_DLL_NAME)) return;
-        if (moduleLoader.load(COPY_SYSTEMS_DLL_NAME, MANIFEST_FILE)) std::cout << "reloaded\n";
+        if (m_moduleLoader.load(COPY_SYSTEMS_DLL_NAME, MANIFEST_FILE)) std::cout << "reloaded\n";
     }
 }
 
 void Engine::run() {
-    while (running) {
+    while (m_running) {
         checkHotReload();
-        Module* t = *moduleLoader.getModule(hash("PrintModule"));
+        Module* t = *m_moduleLoader.getModule(hash("PrintModule"));
         if (t) t->update();
-        w.update();
-        g.update();
+        m_window.update();
+        m_graphics.update();
     }
 }
 
 void Engine::exit() {
-    running = false;
+    m_running = false;
 }
